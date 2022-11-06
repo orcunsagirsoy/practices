@@ -18,8 +18,41 @@
 //Longest Palindromic Substring
 //Longest Substring Without Repeating Characters
 
-
-
+//2D MATRIX SET ZEROS
+function setZeroes(matrix: number[][]): void {
+    let cols = [];
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            if (matrix[i][j] === 0) {
+                cols.push(j);
+                continue;
+            }
+            if (matrix[i].includes(0)) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+    for (let m = 0; m < matrix.length; m++) {
+        for (let n = 0; n < cols.length; n++) {
+            matrix[m][cols[n]] = 0;
+        }
+    }
+    
+//GROUP ANAGRAM HASH TABLES
+function groupAnagrams(strs: string[]): string[][] {
+    let strMap = {};
+    strs.map(str => {
+        console.log(str.split("").sort().join(''));
+        let sortedStr = str.split("").sort().join('');
+        if (strMap[sortedStr]) {
+            strMap[sortedStr].push(str);
+        } else {
+            strMap[sortedStr] = [str];
+        }
+    })
+    console.log(strMap);
+    return Object.values(strMap);
+};
 
 //LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS
 //Sliding window

@@ -7,6 +7,30 @@
 // Merge two binary trees - Solve with JAVA
 //Arranging coins - JAVA
 
+
+
+
+
+//ATBASH SIPHER
+const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+const reverseAlphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"].reverse();
+export const encode = (strEncode) => {
+  let encodedStr = "";
+  strEncode.replace(/\s/g, "").toLowerCase().split('').map(char => {
+    let index = alphabet.findIndex(letter => letter === char);
+    
+    encodedStr += reverseAlphabet[index];
+  });
+  return encodedStr;
+};
+export const decode = (strDecode) => {
+  let decodedStr = "";
+  strDecode.replace(/\s/g, "").toLowerCase().split('').map(char => {
+    let index = alphabet.findIndex(letter => letter === char);
+    decodedStr += reverseAlphabet[index];
+  });
+  return decodedStr;
+
 // N-th PRIME ON GIVEN PRIME NUMBER
 export const prime = (primeNum) => {
   if (primeNum === 0) {
