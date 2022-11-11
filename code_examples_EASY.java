@@ -7,9 +7,95 @@
 // Merge two binary trees - Solve with JAVA
 //Arranging coins - JAVA
 
+//BST MIN DEPTH
+//DFS
+function minDepth(root: TreeNode | null): number {
+    if (!root) return 0;
+    
+    return minDepthHelper(root, 0);
+    // T.C: O(N)
+    // S.C: O(H)
+};
 
+function minDepthHelper(node: TreeNode | null, prevDepth: number): number {
+    if (!node) return Infinity;
+    if (!node.left && !node.right) return prevDepth + 1;
+    
+    return Math.min(minDepthHelper(node.left, prevDepth + 1), minDepthHelper(node.right, prevDepth + 1));
+}
+//BFS
+function minDepth(root: TreeNode | null): number {
+    if (root === null) return null;
+    if (root.left === null) {
+        return minDepth(root.right) + 1;
+    }
+    if (root.right === null) {
+        return minDepth(root.left) + 1;
+    }
+    let left = minDepth(root.left);
+    let right = minDepth(root.right);
+    return Math.min(left, right) + 1;
+};
 
+// LONGEST PALINDROME
+function longestPalindrome(s: string): number {
+    if (s.length === 0) return 0;
+    if (s.length === 1) return 1;
+    let map = new Map();
+    s.split('').map(char => {
+        if (!map[char]) map[char] = 1;
+        else map[char]++;
+    });
+    let result = 0;
+    Object.values(map).forEach((value, index) => {
+        if ((value & 1) == 0) {
+            //console.log(value);
+            result = result + value;
+        } else if ((value & 1) == 1) {
+            //console.log(value);
+            //console.log(Math.floor(value / 2) * 2);
+            result += Math.floor(value / 2) * 2;
+            if (result%2 === 0) {
+                result++
+            }
+        }
+    })
+    //console.log(map);
+    return result;
+};
 
+// ISOMORPHIC STRINGS
+function isIsomorphic(s: string, t: string): boolean {
+    if (s.length != t.length) return false;
+    
+    let sCharMappings: Map<string, string> = new Map<string, string>();
+    let tCharMappings: Map<string, string> = new Map<string, string>();
+    
+    for (let i = 0; i < s.length; i++) {
+        const currentSChar: string = s[i];
+        const currentTChar: string = t[i];
+        
+        // check if s char and t char aren't mapped already
+        const sCharMapped: boolean = sCharMappings.has(currentSChar);
+        const tCharMapped: boolean = tCharMappings.has(currentTChar);
+        
+        if (sCharMapped) {
+            // if sChar is mapped already, is it mapped to the same t value ?
+            if (sCharMappings.get(currentSChar) != currentTChar)
+                return false;
+        }
+        else if (tCharMapped) {
+            // if tChar is mapped already, is it mapped to the same s value ?
+            if (tCharMappings.get(currentTChar) != currentSChar)
+                return false;
+        }
+        else {
+            sCharMappings.set(currentSChar, currentTChar);
+            tCharMappings.set(currentTChar, currentSChar);
+        }
+    }
+    return true;
+};
 
 //ATBASH SIPHER
 const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -1506,6 +1592,37 @@ class Solution {
         }
         return -1;//else returning -1
     }
+}
+
+// LCS WITH 2D ARRAY TABLE
+/* Returns length of LCS for X[0..m-1], Y[0..n-1] */
+function isSubsequence(s: string, t: string): boolean {
+    let m = s.length;
+    let n = t.length;
+    return lcs(s, t, m-1, n-1);;
+};
+
+function lcs(X, Y, m, n): boolean {
+    if(m < 0) return true;
+    if(n < 0) return false;
+    if (X.charAt(m) === Y.charAt(n)) {
+        return lcs(X, Y, m - 1, n - 1);
+    }
+    return lcs(X,Y,m,n-1);
+};
+
+function lcs(X, Y, m, n, dp) // might have problems
+{
+    if (m == 0 || n == 0)
+        return 0;
+    if (X[m - 1] == Y[n - 1])
+        return dp[m][n] = 1 + lcs(X, Y, m - 1, n - 1, dp);
+  
+    if (dp[m][n] != -1) {
+        return dp[m][n];
+    }
+    return dp[m][n] = Math.max(lcs(X, Y, m, n - 1, dp),
+                          lcs(X, Y, m - 1, n, dp));
 }
 
 // IS SUBSEQUENCE
