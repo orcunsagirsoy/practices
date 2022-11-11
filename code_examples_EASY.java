@@ -7,6 +7,27 @@
 // Merge two binary trees - Solve with JAVA
 //Arranging coins - JAVA
 
+
+//STRING REPEAT
+function repeatedStringMatch(a: string, b: string): number {
+    const aLength = a.length;
+    const bLength = b.length;
+
+    let repeatedA = "";
+    let count = 0;
+    while (repeatedA.length < b.length) {
+        repeatedA = repeatedA + a;
+        count++;
+    }
+    if(repeatedA.includes(b)) {
+        return count;
+    }
+    if ((repeatedA + a).includes(b)) {
+        return ++count;
+    }
+    return -1;
+};
+
 //BST MIN DEPTH
 //DFS
 function minDepth(root: TreeNode | null): number {
