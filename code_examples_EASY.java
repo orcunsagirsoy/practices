@@ -8,6 +8,22 @@
 //Arranging coins - JAVA
 
 
+//BALANCED BINARY TREE
+function isBalanced(root: TreeNode | null): boolean {
+    if (!root) return true;
+
+  let height = function (node: TreeNode | null) {
+    if (!node) return 0;
+    return 1 + Math.max(height(node.right), height(node.left));
+  };
+
+  return (
+    Math.abs(height(root.left) - height(root.right)) < 2 &&
+    isBalanced(root.right) &&
+    isBalanced(root.left)
+  );
+};
+
 // WORD PATTERN
 function wordPattern(pattern: string, s: string): boolean {
   const patternMap = new Map<string, string>();
