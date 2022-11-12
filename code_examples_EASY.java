@@ -7,6 +7,16 @@
 // Merge two binary trees - Solve with JAVA
 //Arranging coins - JAVA
 
+//INTERSECTION OF TWO ARRAYS
+function intersection(nums1: number[], nums2: number[]): number[] {
+  const set = new Set();
+  const res = new Set<number>();
+  nums1.forEach((num) => set.add(num));
+  nums2.forEach((num) => {
+    if (set.has(num)) res.add(num);
+  });
+  return [...res];
+}
 
 //STRING REPEAT
 function repeatedStringMatch(a: string, b: string): number {

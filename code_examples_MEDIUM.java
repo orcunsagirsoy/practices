@@ -18,6 +18,25 @@
 //Longest Palindromic Substring
 //Longest Substring Without Repeating Characters
 
+
+// VALID PARANTHESIS
+function checkValidString(s: string): boolean {
+    
+    let low = 0;
+    let high = 0;
+
+    for (let i = 0; i < s.length; i++) {
+        low = low + (s[i] === "(" ? 1 : -1);
+        high = high + (s[i] !== ")" ? 1 : -1);
+        if (high < 0) break;
+        low = Math.max(low, 0);
+        //console.log("s[i]: ", s[i]);
+        //console.log("low: ", low);
+        //console.log("high: ", high);
+    }
+    return low === 0;
+};
+
 //2D MATRIX SET ZEROS
 function setZeroes(matrix: number[][]): void {
     let cols = [];
