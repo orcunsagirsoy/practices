@@ -8,6 +8,52 @@
 //Arranging coins - JAVA
 
 
+// DFS ISLAND PERIMETER
+    let perimeter = 0;
+    const dfs = (grid, i, j) => {
+        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] === 0) {
+            perimeter++;
+            return;
+        }
+        if (grid[i][j] === 2) return;
+
+        grid[i][j] = 2;
+
+        dfs(grid, i + 1, j);
+        dfs(grid, i - 1, j);
+        dfs(grid, i, j + 1);
+        dfs(grid, i, j - 1);
+    }
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid.length; j++) {
+            
+            if (grid[i][j] === 1) {
+                dfs(grid, i, j);
+            }
+        }
+    }
+    return perimeter;
+};
+
+
+//MIN ABS DIFFERENCE BST
+function getMinimumDifference(root: TreeNode | null): number {
+    let min = Infinity;
+    let previous = undefined;
+    const dfs = (node: TreeNode | null) => {
+        if (!node) return;
+        dfs(node.left);
+        if(previous !== undefined) {
+            min = Math.min(min, node.val - previous);
+        }
+        previous = node.val;
+
+        dfs(node.right);
+    }
+    dfs(root);
+    return min;
+};
+
 //BALANCED BINARY TREE
 function isBalanced(root: TreeNode | null): boolean {
     if (!root) return true;

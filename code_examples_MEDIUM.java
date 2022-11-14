@@ -18,6 +18,21 @@
 //Longest Palindromic Substring
 //Longest Substring Without Repeating Characters
 
+// SUBSETS
+function subsets(nums: number[]): number[][] {
+    const subsets = [[]];
+    for(const num of nums){
+        const lengthOfSubsets = subsets.length;
+        for (let i = 0 ; i < lengthOfSubsets ; i++) {
+        const set = [...subsets[i]];
+        console.log("set1", set);
+        set.push(num);
+        console.log("set2", set);
+        subsets.push(set);
+        }
+    }
+    return subsets;
+};
 
 // VALID PARANTHESIS
 function checkValidString(s: string): boolean {
